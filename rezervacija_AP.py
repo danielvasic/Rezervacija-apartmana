@@ -106,16 +106,13 @@ scroll.pack(side = "right", fill = Y)
 Lb.config(yscrollcommand = scroll.set)            
 Lb.insert(0,"Rezervirao apartman: (Ime i prezime, Mjesto, Naziv apartmana, Datum boravka, Broj osoba)")
 
-
-
+app = App(master)
 
 def rezerviraj_ap():
         print("Rezervirali ste apartman")
-
         c.execute('INSERT INTO tabla (ime_i_prezime , self.mjesto, self.naziv_apartmana, datum_boravka, broj_osoba) VALUES (?, ?, ?, ?, ?)',
-                  (ime_i_prezime.get(), self.mjesto.get(), self.naziv_apartmana.get(), datum_boravka.get(), broj_osoba.get()))
+                  (ime_i_prezime.get(), app.mjesto.get(), app.naziv_apartmana.get(), datum_boravka.get(), broj_osoba.get()))
         con.commit()
-
         ime_i_prezime.delete(0, END)
        
 
@@ -123,7 +120,6 @@ def ispis():
         print("Ispisali ste podatke iz baze podataka")
         c.execute('SELECT * FROM tabla')
         podaci = c.fetchall()
-            
         for row in podaci:
                 Lb.insert(1,row)         
 
@@ -131,12 +127,10 @@ def ispis():
 
 def izbrisati():
         print ("Izbrisali ste rezervaciju")
-        c.execute("DELETE FROM tabla WHERE ime_i_prezime = '" + self.ime_i_prezime.get() + "'")
+        c.execute("DELETE FROM tabla WHERE ime_i_prezime = '" + ime_i_prezime.get() + "'")
         con.commit()
-
         ime_i_prezime.delete(0, END)
-        
-        
+
 button1 = Button(frame, text="Završi rezervaciju!",command=rezerviraj_ap, font=("Helvetica 23 bold"), fg="red")
 button1.place(relx=0, rely=0, relheight=1, relwidth=1)    
 
@@ -146,11 +140,8 @@ button2.place(relx=0.69, rely=0.84, relheight=0.074, relwidth=0.15)
 button3 = Button(master, text="Izbrišite rezervaciju", command=izbrisati, font=("Helvetica 12 bold"), fg="red")
 button3.place(relx=0.69, rely=0.92, relheight=0.074, relwidth=0.15)
 
-if __name__ == "__main__":
-    
-    app = App(master)
-    app.mainloop()
-            
+
+app.mainloop()  
 master.mainloop()
 c.close()
 con.close()

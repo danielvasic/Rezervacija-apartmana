@@ -110,7 +110,7 @@ app = App(master)
 
 def rezerviraj_ap():
         print("Rezervirali ste apartman")
-        c.execute('INSERT INTO tabla (ime_i_prezime , self.mjesto, self.naziv_apartmana, datum_boravka, broj_osoba) VALUES (?, ?, ?, ?, ?)',
+        c.execute('INSERT INTO tabla (ime_i_prezime , mjesto, naziv_apartmana, datum_boravka, broj_osoba) VALUES (?, ?, ?, ?, ?)',
                   (ime_i_prezime.get(), app.mjesto.get(), app.naziv_apartmana.get(), datum_boravka.get(), broj_osoba.get()))
         con.commit()
         ime_i_prezime.delete(0, END)
